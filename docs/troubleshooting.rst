@@ -168,3 +168,25 @@ This issue should only happen in development mode. Long story short, it can be s
     tutor dev run lms ./manage.py lms waffle_switch block_structure.invalidate_cache_on_publish on --create
 
 If you'd like to learn more, please take a look at `this Github issue <https://github.com/overhangio/tutor/issues/302>`__.
+
+Reoccuring error "ERR_SOCKET_TIMEOUT" on "tutor images build mfe" 
+-----------------------------------------------------------------
+
+This issue can happen due to a network connection issue if occurs once or twice, but if the issue persists then it is due to high resourse consumption issue related to BuildKit for building simultaneously multiple MFEs enabled.
+
+Troubleshooting Steps:
+
+Create a buildkit.toml configuration file with the following contents::
+
+    [worker.oci]
+    max-parallelism = 2
+
+Create a builder that uses this configuration::
+
+    docker buildx create --use --name=max2cpu --driver=docker-container --config=/path/to/buildkit.toml
+
+Now build the MFE image again using Tutor::
+
+    tutor images build mfe
+
+This configuration will limit the number of layers built concurrently to 2, which can significantly reduce resource consumption (Can even be reduced to 1 if the issue persists).
