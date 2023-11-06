@@ -169,10 +169,10 @@ This issue should only happen in development mode. Long story short, it can be s
 
 If you'd like to learn more, please take a look at `this Github issue <https://github.com/overhangio/tutor/issues/302>`__.
 
-Reoccuring error "ERR_SOCKET_TIMEOUT" on "tutor images build mfe" 
------------------------------------------------------------------
+High resource consumption on ``tutor images build`` by docker 
+-------------------------------------------------------------
 
-This issue can happen due to a network connection issue if occurs once or twice, but if the issue persists then it is due to high resourse consumption issue related to BuildKit for building simultaneously multiple MFEs enabled.
+This issue can occur when building multiple images simultaneously by Docker, issue specifically related to BuildKit.
 
 Troubleshooting Steps:
 
@@ -181,12 +181,16 @@ Create a buildkit.toml configuration file with the following contents::
     [worker.oci]
     max-parallelism = 2
 
+This configuration file limits the number of layers built concurrently to 2, which can significantly reduce resource consumption.
+
 Create a builder that uses this configuration::
 
-    docker buildx create --use --name=max2cpu --driver=docker-container --config=/path/to/buildkit.toml
+    docker buildx create --use --name=<name> --driver=docker-container --config=/path/to/buildkit.toml
 
-Now build the MFE image again using Tutor::
+Replace <name> with a suitable name for your builder, and ensure that you specify the correct path to the buildkit.toml configuration file.
 
-    tutor images build mfe
+Now build again::
 
-This configuration will limit the number of layers built concurrently to 2, which can significantly reduce resource consumption (Can even be reduced to 1 if the issue persists).
+    tutor images build
+
+By following these steps, you should be able to mitigate the problem.
