@@ -141,6 +141,26 @@ The default Open edX theme is rather bland, so Tutor makes it easy to switch to 
 
 Out of the box, only the default "open-edx" theme is available. We also developed `Indigo, a beautiful, customizable theme <https://github.com/overhangio/indigo>`__ which is easy to install with Tutor.
 
+.. _update_mysql_authentication_plugin:
+
+Updating the authentication plugin of MySQL users
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As of MySQL v8.4.0, the ``mysql_native_password`` authentication plugin has been deprecated. Users created with this authentication plugin should ideally be updated to use the latest ``caching_sha2_password`` authentication plugin.
+
+Tutor makes it easy do so with this handy command::
+
+    tutor local do update_mysql_authentication_plugin
+
+If you only want to update the authentication plugin of specific users, you can use the ``--users`` option. This option takes comma seperated names of users to upgrade::
+
+    tutor local do update_mysql_authentication_plugin --users=discovery,ecommerce
+
+Do note that if you are updating a specific user, there should be corresponding entries in the configuration for the mysql username and password for that user. For example, if you are trying to update the user ``myuser``, the following case sensitive entries need to be present in the configuration::
+
+    MYUSER_MYSQL_USERNAME
+    MYUSER_MYSQL_PASSWORD
+
 Running arbitrary ``manage.py`` commands
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
