@@ -399,7 +399,7 @@ spec:
             - "--binlog-expire-logs-seconds=259200"
             # We only require this option for MySQL 8.4 and above
             # Breaks MySQL for previous versions as this option does not exist on versions earlier than 8.4
-            {% if DOCKER_IMAGE_MYSQL.split(':')[-1].split('.') | map('int') | list >= '8.4.0'.split('.') | map('int') | list -%}
+            {% if DOCKER_IMAGE_MYSQL.split(':')[-1] == "latest" or (DOCKER_IMAGE_MYSQL.split(':')[-1].split('.') | map('int') | list >= '8.4.0'.split('.') | map('int') | list) -%}
             - "--mysql-native-password=ON"
             {%- endif %}
           env:
