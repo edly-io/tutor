@@ -13,8 +13,9 @@ from typing_extensions import ParamSpec
 
 from tutor import config as tutor_config
 from tutor import env, fmt, hooks, plugins
+from tutor.commands.context import Context
+from tutor.commands.jobs_utils import get_mysql_change_authentication_plugin_query
 from tutor.hooks import priorities
-from tutor.utils import get_mysql_change_authentication_plugin_query
 
 
 class DoGroup(click.Group):
@@ -323,13 +324,13 @@ def sqlshell(args: list[str]) -> t.Iterable[tuple[str, str]]:
     nargs=1,
     help="Specific users to upgrade the authentication plugin of. Requires comma-seperated values with no space in-between.",
 )
-def update_mysql_authentication_plugin(users: str) -> t.Iterable[tuple[str, str]]:
+@click.pass_obj
+def update_mysql_authentication_plugin(context: Context, users: str) -> t.Iterable[tuple[str, str]]:
     """
     Update the authentication plugin of MySQL users from mysql_native_password to caching_sha2_password
     Handy command used when upgrading to v8.4 of MySQL which deprecates mysql_native_password
     """
 
-    context = click.get_current_context().obj
     config = tutor_config.load(context.root)
 
     if not config["RUN_MYSQL"]:
