@@ -325,7 +325,9 @@ def sqlshell(args: list[str]) -> t.Iterable[tuple[str, str]]:
     help="Specific users to upgrade the authentication plugin of. Requires comma-seperated values with no space in-between.",
 )
 @click.pass_obj
-def update_mysql_authentication_plugin(context: Context, users: str) -> t.Iterable[tuple[str, str]]:
+def update_mysql_authentication_plugin(
+    context: Context, users: str
+) -> t.Iterable[tuple[str, str]]:
     """
     Update the authentication plugin of MySQL users from mysql_native_password to caching_sha2_password
     Handy command used when upgrading to v8.4 of MySQL which deprecates mysql_native_password

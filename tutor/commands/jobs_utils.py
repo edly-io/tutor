@@ -4,10 +4,12 @@ This module provides utility methods for tutor `do` commands
 Methods:
 - `get_mysql_change_authentication_plugin_query`: Generates MySQL queries to update the authentication plugin for MySQL users.
 """
+
 from typing import List
 
 from tutor import exceptions
 from tutor.types import Config, ConfigValue
+
 
 def get_mysql_change_authentication_plugin_query(
     config: Config, users: List[str], all_users: bool

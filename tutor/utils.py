@@ -366,5 +366,3 @@ def format_table(rows: List[Tuple[str, ...]], separator: str = "\t") -> str:
             # Append EOL at all lines but the last one
             formatted += "\n"
     return formatted
-
-
