@@ -330,7 +330,7 @@ def update_mysql_authentication_plugin(
 ) -> t.Iterable[tuple[str, str]]:
     """
     Update the authentication plugin of MySQL users from mysql_native_password to caching_sha2_password
-    Handy command used when upgrading to v8.4 of MySQL which deprecates mysql_native_password
+    Handy command utilized when upgrading to v8.4 of MySQL which deprecates mysql_native_password
     """
 
     config = tutor_config.load(context.root)
@@ -347,6 +347,10 @@ def update_mysql_authentication_plugin(
     query = get_mysql_change_authentication_plugin_query(
         config, users_to_update, not users
     )
+
+    # In case there is no user to update the authentication plugin of
+    if not query:
+        return
 
     mysql_command = (
         "mysql --user={{ MYSQL_ROOT_USERNAME }} --password={{ MYSQL_ROOT_PASSWORD }} --host={{ MYSQL_HOST }} --port={{ MYSQL_PORT }} --database={{ OPENEDX_MYSQL_DATABASE }} "

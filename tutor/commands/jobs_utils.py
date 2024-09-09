@@ -7,7 +7,7 @@ Methods:
 
 from typing import List
 
-from tutor import exceptions
+from tutor import exceptions, fmt
 from tutor.types import Config, ConfigValue
 
 
@@ -41,6 +41,9 @@ def get_mysql_change_authentication_plugin_query(
     def generate_mysql_authentication_plugin_update_query(
         username: ConfigValue, password: ConfigValue, host: str
     ) -> str:
+        fmt.echo_info(
+            f"Authentication plugin of user {username} will be updated to caching_sha2_password"
+        )
         return f"ALTER USER '{username}'@'{host}' IDENTIFIED with caching_sha2_password BY '{password}';"
 
     def generate_user_queries(users: List[str]) -> str:
@@ -51,11 +54,11 @@ def get_mysql_change_authentication_plugin_query(
                 f"{user_uppercase}_MYSQL_USERNAME" in config
                 and f"{user_uppercase}_MYSQL_PASSWORD" in config
             ):
-                raise exceptions.TutorError(
-                    f"Username or Password for User {user} not found in config. "
-                    f"Please make sure that the following entries are present in the configuration:\n"
-                    f"{user_uppercase}_MYSQL_USERNAME\n{user_uppercase}_MYSQL_PASSWORD"
+                fmt.echo_warning(
+                    f"Username or Password for User {user} not found in config. Skipping update process for User {user}."
                 )
+                continue
+
             query += generate_mysql_authentication_plugin_update_query(
                 config[f"{user_uppercase}_MYSQL_USERNAME"],
                 config[f"{user_uppercase}_MYSQL_PASSWORD"],

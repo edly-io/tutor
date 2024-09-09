@@ -152,11 +152,11 @@ Tutor makes it easy do so with this handy command::
 
     tutor local do update_mysql_authentication_plugin
 
-If you only want to update the authentication plugin of specific users, you can use the ``--users`` option. This option takes comma seperated names of users to upgrade::
+The above command will update all the database users created by Tutor. If you only want to update the authentication plugin of specific users, you can use the ``--users`` option. This option takes comma seperated names of users to upgrade::
 
     tutor local do update_mysql_authentication_plugin --users=discovery,ecommerce
 
-Do note that if you are updating a specific user, there should be corresponding entries in the configuration for the mysql username and password for that user. For example, if you are trying to update the user ``myuser``, the following case sensitive entries need to be present in the configuration::
+For this command, Tutor expects specific entries in the configuration for the mysql username and password of a database user. For example, if you are trying to update the user ``myuser``, the following case sensitive entries need to be present in the configuration::
 
     MYUSER_MYSQL_USERNAME
     MYUSER_MYSQL_PASSWORD
