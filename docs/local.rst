@@ -150,11 +150,11 @@ As of MySQL v8.4.0, the ``mysql_native_password`` authentication plugin has been
 
 Tutor makes it easy do so with this handy command::
 
-    tutor local do update_mysql_authentication_plugin
+    tutor local do update-mysql-authentication-plugin
 
 The above command will update all the database users created by Tutor. If you only want to update the authentication plugin of specific users, you can use the ``--users`` option. This option takes comma seperated names of users to upgrade::
 
-    tutor local do update_mysql_authentication_plugin --users=discovery,ecommerce
+    tutor local do update-mysql-authentication-plugin --users=discovery,ecommerce
 
 For this command, Tutor expects specific entries in the configuration for the mysql username and password of a database user. For example, if you are trying to update the user ``myuser``, the following case sensitive entries need to be present in the configuration::
 
