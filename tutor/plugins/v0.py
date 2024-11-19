@@ -291,6 +291,7 @@ class OfficialPlugin(BasePlugin):
         "notes",
         "webui",
         "xqueue",
+        "jupyterlite"
     ]
 
     def _load_obj(self) -> None:

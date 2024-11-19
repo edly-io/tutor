@@ -10,3 +10,4 @@ tutor-minio>=16.0.0,<17.0.0
 tutor-notes>=16.0.0,<17.0.0
 tutor-webui>=16.0.0,<17.0.0
 tutor-xqueue>=16.0.0,<17.0.0
+tutor-contrib-jupyterlite==16.1.7
