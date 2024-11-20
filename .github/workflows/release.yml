@@ -80,7 +80,7 @@ jobs:
 
       ##### Create release on GitHub
       - name: Create or update GitHub release
-        run: scriv github-release --repo=overhangio/tutor
+        run: scriv github-release --repo=edly-io/tutor
         env:
           GITHUB_TOKEN: ${{ github.token }}
         # scriv command will fail when not on a tag, such as running with act or a

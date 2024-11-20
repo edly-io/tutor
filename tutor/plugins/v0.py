@@ -156,6 +156,16 @@ class BasePlugin:
         Load hooks and check types.
         """
         tasks = get_callable_attr(self.obj, "hooks", default={})
+        print(f"self.obj: {self.obj}")
+        print(f"tasks: {tasks}")
+        # Check if tasks is a module and try to access its attributes
+        import sys
+        if isinstance(tasks, type(sys)):
+            # Assuming hooks are defined in a variable named 'hooks' in the module
+            print("Attributes of the tasks module:")
+            print(dir(tasks))  # List of attribute names
+            print(vars(tasks))  # Dictionary of attribute names and values
+            tasks = getattr(tasks, 'hooks', {})
         if not isinstance(tasks, dict):
             raise exceptions.TutorError(
                 f"Invalid hooks in plugin {self.name}. Expected dict, got {tasks.__class__}."
