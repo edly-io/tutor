@@ -1,6 +1,7 @@
 import importlib
 import importlib.util
 import os
+import sys
 import typing as t
 from glob import glob
 
@@ -156,6 +157,8 @@ class BasePlugin:
         Load hooks and check types.
         """
         tasks = get_callable_attr(self.obj, "hooks", default={})
+        if isinstance(tasks, type(sys)):
+            tasks = getattr(tasks, 'hooks', {})
         if not isinstance(tasks, dict):
             raise exceptions.TutorError(
                 f"Invalid hooks in plugin {self.name}. Expected dict, got {tasks.__class__}."
@@ -282,9 +285,11 @@ class OfficialPlugin(BasePlugin):
 
     NAMES = [
         "android",
+        "cairn",
         "discovery",
         "ecommerce",
         "forum",
+        "jupyterlite",
         "license",
         "mfe",
         "minio",
