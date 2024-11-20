@@ -285,6 +285,7 @@ class OfficialPlugin(BasePlugin):
         "discovery",
         "ecommerce",
         "forum",
+        "jupyterlite",
         "license",
         "mfe",
         "minio",
