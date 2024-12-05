@@ -296,6 +296,11 @@ class OfficialPlugin(BasePlugin):
         "notes",
         "webui",
         "xqueue",
+        "badgr",
+        "commonsettings",
+        "commontheme",
+        "credentials",
+        "wordpress",
     ]
 
     def _load_obj(self) -> None:

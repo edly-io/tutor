@@ -1,11 +1,14 @@
-# change version ranges when upgrading from palm
 tutor-android>=16.0.0,<17.0.0
-git+https://github.com/edly-io/tutor-cairn.git@sdaia-dev
-git+https://github.com/edly-io/tutor-contrib-jupyterlite.git@sdaia-0.0.2
+tutor-cairn@git+https://github.com/edly-io/tutor-cairn.git@sdaia-dev
+tutor-contrib-jupyterlite@git+https://github.com/edly-io/tutor-contrib-jupyterlite.git@sdaia-0.0.2
+tutor-contrib-badgr@git+https://github.com/edly-io/tutor-contrib-badgr.git@sdaia-1.0.7
+tutor-plugin-common@git+https://github.com/edly-io/tutor-plugin-common.git@sdaia-redhat
+tutor-theme-common@git+https://github.com/edly-io/tutor-theme-common.git@sdaia-1.0.14
+tutor-contrib-wordpress@git+https://github.com/edly-io/tutor-contrib-wordpress.git@sdaia-1.1.5
+tutor-credentials>=16.0.0,<17.0.0
 tutor-discovery>=16.0.0,<17.0.0
 tutor-ecommerce>=16.0.0,<17.0.0
 tutor-forum>=16.0.0,<17.0.0
-tutor-license>=16.0.0,<17.0.0
 tutor-mfe>=16.0.0,<17.0.0
 tutor-minio>=16.0.0,<17.0.0
 tutor-notes>=16.0.0,<17.0.0

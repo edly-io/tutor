@@ -103,7 +103,7 @@ ci-test-bundle: ## Run basic tests on bundle
 	yes "" | ./dist/tutor config save --interactive
 	./dist/tutor config save
 	./dist/tutor plugins list
-	./dist/tutor plugins enable android cairn discovery ecommerce forum jupyterlite license mfe minio notes webui xqueue
+	./dist/tutor plugins enable android cairn discovery ecommerce forum jupyterlite license mfe minio notes webui xqueue badgr commonsettings commontheme credentials wordpress
 	./dist/tutor plugins list
 	./dist/tutor license --help
 
